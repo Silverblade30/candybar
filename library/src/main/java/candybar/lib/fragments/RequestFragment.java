@@ -384,7 +384,7 @@ public class RequestFragment extends Fragment implements View.OnClickListener {
 
         private MaterialDialog dialog;
         private String apiKey = getResources().getString(R.string.arctic_manager_api_key);
-         private boolean isArctic = false;
+        private boolean isArctic = (apiKey.length() > 0) && !(Preferences.get(getActivity()).isPremiumRequest());
         private String errorMessage;
 
         @Override
@@ -423,7 +423,7 @@ public class RequestFragment extends Fragment implements View.OnClickListener {
                         if (icon != null) files.add(icon);
                     }
 
-                    if (isArctic) {
+                    if (isArctic==true) {
                         RequestBody okRequestBody = new MultipartBody.Builder()
                                 .setType(MultipartBody.FORM)
                                 .addFormDataPart("apps", RequestHelper.buildJsonForArctic(requests))
